@@ -241,3 +241,4 @@ var colors = new SpecialArray("red", "blue", "green");
 console.log(colors.toPipedString()); //"red|blue|green"
 console.log(colors instanceof SpecialArray);
 // =============================================================================
+// =============================================================================
