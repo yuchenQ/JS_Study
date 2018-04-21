@@ -240,4 +240,101 @@ function SpecialArray() {
 var colors = new SpecialArray("red", "blue", "green");
 console.log(colors.toPipedString()); //"red|blue|green"
 console.log(colors instanceof SpecialArray);
-// =============================================================================:
+// =============================================================================
+function SuperType(name) {
+  this.name = name;
+  this.colors = ["red", "blue", "green"];
+}
+
+SuperType.prototype.sayName = function() {
+  console.log(this.name);
+};
+
+function SubType(name, age) {
+  SuperType.call(this, name);
+
+  this.age = age;
+}
+SubType.prototype = new SuperType();
+
+SubType.prototype.sayAge = function() {
+  console.log(this.age);
+};
+
+var instance1 = new SubType("Nicholas", 29);
+instance1.colors.push("black");
+console.log(instance1.colors); //"red,blue,green,black"
+instance1.sayName(); //"Nicholas";
+instance1.sayAge(); //29
+
+
+var instance2 = new SubType("Greg", 27);
+console.log(instance2.colors); //"red,blue,green"
+instance2.sayName(); //"Greg";
+instance2.sayAge(); //27
+// =============================================================================
+var person = {
+  name: "Nicholas",
+  friends: ["Shelby", "Court", "Van"]
+};
+
+var anotherPerson = Object.create(person);
+anotherPerson.name = "Greg";
+anotherPerson.friends.push("Rob");
+
+var yetAnotherPerson = Object.create(person);
+yetAnotherPerson.name = "Linda";
+yetAnotherPerson.friends.push("Barbie");
+
+console.log(person.friends); //"Shelby,Court,Van,Rob,Barbie"
+
+aperson = Object.create(person, {
+  name: {
+    value: 'Greg'
+  }
+});
+console.log(aperson.name);
+// =============================================================================
+function object(o) {
+  function F() {}
+  F.prototype = o;
+  return new F();
+}
+
+function inheritPrototype(subType, superType) {
+  var p = object(superType.prototype); //create object
+  p.constructor = subType; //augment object
+  subType.prototype = p; //assign object
+}
+// -----------------------------------------------------------------------------
+function SuperType(name) {
+  this.name = name;
+  this.colors = ["red", "blue", "green"];
+}
+
+SuperType.prototype.sayName = function() {
+  console.log(this.name);
+};
+// -----------------------------------------------------------------------------
+function SubType(name, age) {
+  SuperType.call(this, name);
+
+  this.age = age;
+}
+
+inheritPrototype(SubType, SuperType);
+
+SubType.prototype.sayAge = function() {
+  console.log(this.age);
+};
+// -----------------------------------------------------------------------------
+var instance3 = new SubType("Nicholas", 29);
+instance3.colors.push("black");
+console.log(instance3.colors); //"red,blue,green,black"
+instance3.sayName(); //"Nicholas";
+instance3.sayAge(); //29
+
+var instance4 = new SubType("Greg", 27);
+console.log(instance4.colors); //"red,blue,green"
+instance4.sayName(); //"Greg";
+instance4.sayAge(); //27
