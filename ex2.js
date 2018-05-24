@@ -27,3 +27,4 @@ var funcs = createFunctions();
 for (var i=0; i < funcs.length; i++){
     console.log(funcs[i]());
 }
+// =============================================================================
