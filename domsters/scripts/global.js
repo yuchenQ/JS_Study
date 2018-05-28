@@ -22,17 +22,6 @@ function highlightPage() {
       document.body.setAttribute("id", linktext);
     }
   }
-  // for (var i = 0; i < links.length; i++) {
-  //   var linkurl;
-  //   for (var i = 0; i < links.length; i++) {
-  //     linkurl = links[i].getAttribute("href");
-  //     if (window.location.href.indexOf(linkurl) != -1) {
-  //       links[i].className = "here";
-  //       var linktext = links[i].lastChild.nodeValue.toLowerCase();
-  //       document.body.setAttribute("id", linktext);
-  //     }
-  //   }
-  // }
 }
 
 // Home:
