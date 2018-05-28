@@ -19,8 +19,6 @@ function insertAfter(newElement, targetElement) {
   }
 }
 // =============================================================================
-
-// =============================================================================
 function addClass(element, value) {
   if (!element.className) {
     element.className = value;
