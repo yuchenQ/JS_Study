@@ -28,3 +28,8 @@ for (var i=0; i < funcs.length; i++){
     console.log(funcs[i]());
 }
 // =============================================================================
+function log(){
+  console.log.apply(console, arguments);
+}
+log(1);    //1
+log(1,2);    //1 2
