@@ -27,6 +27,46 @@ function Queue() {
   };
 }
 
+// ES6 queue:
+let Queue2 = (function() {
+  const items = new WeakMap();
+  class Queue2 {
+    constructor() {
+      items.set(this, []);
+    }
+    enqueue(element) {
+      let q = items.get(this);
+      q.push(element);
+    }
+    dequeue() {
+      let q = items.get(this);
+      let r = q.shift();
+      return r;
+    }
+    front() {
+      let q = items.get(this);
+      return q[0];
+    }
+    isEmpty() {
+      return items.get(this).length == 0;
+    }
+    size() {
+      let q = items.get(this);
+      return q.length;
+    }
+    clear() {
+      items.set(this, []);
+    }
+    print() {
+      console.log(this.toString());
+    }
+    toString() {
+      return items.get(this).toString();
+    }
+  }
+  return Queue2;
+})();
+
 // 2.1 、优先队列
 // 指队列元素的添加和移除是基于优先级的。实现一个优先队列，有两种选项：
 // 1.设置优先级，然后再正确的位置添加元素；
@@ -74,6 +114,79 @@ function PriorityQueue() {
     }
   };
 }
+
+// PriorityQueue: ES6 Version
+let PriorityQueue2 = (function() {
+
+  class QueueElement {
+    constructor(element, priority) {
+      this.element = element;
+      this.priority = priority;
+    }
+  }
+
+  const items = new WeakMap();
+// extends Queue2
+// { with this approach the private properties are not reachable through inheritance
+  class PriorityQueue2 {
+    constructor() {
+      items.set(this, []);
+    }
+
+    enqueue(element, priority) {
+      let queueElement = new QueueElement(element, priority);
+
+      let q = items.get(this);
+
+      let added = false;
+      for (let i = 0; i < q.length; i++) {
+        if (queueElement.priority < q[i].priority) {
+          q.splice(i, 0, queueElement);
+          added = true;
+          break;
+        }
+      }
+      if (!added) {
+        q.push(queueElement);
+      }
+
+      items.set(this, q);
+    };
+
+    dequeue() {
+      let q = items.get(this);
+      let r = q.shift();
+      items.set(this, q);
+      return r;
+    }
+
+    front() {
+      let q = items.get(this);
+      return q[0];
+    }
+
+    isEmpty() {
+      return items.get(this).length == 0;
+    }
+
+    size() {
+      let q = items.get(this);
+      return q.length;
+    }
+
+    clear() {
+      items.set(this, []);
+    }
+
+    print() {
+      let q = items.get(this);
+      for (let i = 0; i < q.length; i++) {
+        console.log(`${q[i].element}  - ${q[i].priority}`);
+      }
+    };
+  }
+  return PriorityQueue2;
+})();
 
 // 2.2 、循环队列——击鼓传花
 // 击鼓传花游戏，在这个游戏中，孩子们围成一个圆圈，把花尽快的传递给旁边的人。

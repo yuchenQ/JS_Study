@@ -8,14 +8,16 @@ function highlightPage() {
   var headers = document.getElementsByTagName('header');
   if (headers.length == 0)
     return false;
+// headers[0] 指的是数组中的第一个 header 元素！
   var navs = headers[0].getElementsByTagName('nav');
   if (navs.length == 0)
     return false;
-
+// navs[0] 指的是数组中的第一个 nav 元素！
   var links = navs[0].getElementsByTagName("a");
   for (var i = 0; i < links.length; i++) {
     var linkurl = links[i].getAttribute("href");
     var currenturl = window.location.href;
+// 如果 linkurl 和 currenturl 一样：
     if (currenturl.indexOf(linkurl) != -1) {
       links[i].className = "here";
       var linktext = links[i].lastChild.nodeValue.toLowerCase();
@@ -103,6 +105,7 @@ function prepareInternalnav() {
     if (!document.getElementById(sectionId))
       continue;
     document.getElementById(sectionId).style.display = "none";
+    // 创建自定义属性 destination：
     links[i].destination = sectionId;
     links[i].onclick = function() {
       showElement("section", this.destination);
@@ -194,6 +197,7 @@ function highlightRows() {
     return false;
   var rows = document.getElementsByTagName("tr");
   for (var i = 0; i < rows.length; i++) {
+// oldClassName 自定义属性：
     rows[i].oldClassName = rows[i].className
     rows[i].onmouseover = function() {
       addClass(this, "highlight");
@@ -261,6 +265,21 @@ function focusLabels() {
   }
 }
 
+function prepareForms() {
+  for (var i = 0; i < document.forms.length; i++) {
+    var thisform = document.forms[i];
+    resetFields(thisform);
+    thisform.onsubmit = function() {
+      if (!validateForm(this))
+        return false;
+      var article = document.getElementsByTagName('article')[0];
+      if (submitFormWithAjax(this, article))
+        return false;
+      return true;
+    }
+  }
+}
+
 function resetFields(whichform) {
   if (Modernizr.input.placeholder)
     return;
@@ -311,21 +330,6 @@ function isEmail(field) {
   return (field.value.indexOf("@") != -1 && field.value.indexOf(".") != -1);
 }
 
-function prepareForms() {
-  for (var i = 0; i < document.forms.length; i++) {
-    var thisform = document.forms[i];
-    resetFields(thisform);
-    thisform.onsubmit = function() {
-      if (!validateForm(this))
-        return false;
-      var article = document.getElementsByTagName('article')[0];
-      if (submitFormWithAjax(this, article))
-        return false;
-      return true;
-    }
-  }
-}
-
 // Ajax
 function getHTTPObject() {
   if (typeof XMLHttpRequest == "undefined")
@@ -358,15 +362,12 @@ function displayAjaxLoading(element) {
 }
 
 function submitFormWithAjax(whichform, thetarget) {
-
   var request = getHTTPObject();
   if (!request) {
     return false;
   }
-
   // Display a loading message.
   displayAjaxLoading(thetarget);
-
   // Collect the data.
   var dataParts = [];
   var element;
@@ -375,10 +376,8 @@ function submitFormWithAjax(whichform, thetarget) {
     dataParts[i] = element.name + '=' + encodeURIComponent(element.value);
   }
   var data = dataParts.join('&');
-
   request.open('POST', whichform.getAttribute("action"), true);
   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
   request.onreadystatechange = function() {
     if (request.readyState == 4) {
       if (request.status == 200 || request.status == 0) {
@@ -393,9 +392,7 @@ function submitFormWithAjax(whichform, thetarget) {
       }
     }
   };
-
   request.send(data);
-
   return true;
 };
 // =============================================================================
