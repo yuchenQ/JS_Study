@@ -11,8 +11,10 @@ function LinkedList() {
     this.element = element;
     this.next = null;
   };
+
   var length = 0; //链表长度
   var head = null; //第一个节点
+
   this.append = function(element) {
     var node = new Node(element),
       current;
@@ -28,6 +30,7 @@ function LinkedList() {
     }
     length++; //更新列表长度
   };
+
   this.insert = function(position, element) {
     //检查越界值
     if (position >= 0 && position <= length) {
@@ -52,6 +55,7 @@ function LinkedList() {
       return false;
     }
   };
+
   this.removeAt = function(position) {
     if (position > -1 && position < length) {
       var current = head,
@@ -73,10 +77,12 @@ function LinkedList() {
       return null;
     }
   };
+
   this.remove = function(element) {
     var index = this.indexOf(element);
     return this.removeAt(index);
   };
+
   this.indexOf = function(element) {
     var current = head,
       index = 0;
@@ -89,15 +95,19 @@ function LinkedList() {
     }
     return -1;
   };
+
   this.isEmpty = function() {
     return length === 0;
   };
+
   this.size = function() {
     return length;
   };
+
   this.getHead = function() {
     return head;
   };
+
   this.toString = function() {
     var current = head,
       string = '';
@@ -107,6 +117,7 @@ function LinkedList() {
     }
     return string;
   };
+
   this.print = function() {
     console.log(this.toString());
   };
@@ -124,6 +135,7 @@ function DoublyLinkedList() {
   var length = 0;
   var head = null;
   var tail = null; //新添加的
+
   this.append = function(element) {
     var node = new Node(element),
       current;
@@ -137,6 +149,7 @@ function DoublyLinkedList() {
     }
     length++;
   };
+
   this.insert = function(position, element) {
     if (position >= 0 && position <= length) {
       var node = new Node(element),
@@ -174,6 +187,7 @@ function DoublyLinkedList() {
       return false;
     }
   };
+
   this.removeAt = function(position) {
     if (position > -1 && position < length) {
       var current = head,
@@ -187,7 +201,7 @@ function DoublyLinkedList() {
           head.prev = null;
         }
       } else if (position === length - 1) {
-        移除最后一项
+        // 移除最后一项
         current = tail; // {4}
         tail = current.prev;
         tail.next = null;
@@ -205,10 +219,12 @@ function DoublyLinkedList() {
       return null;
     }
   };
+
   this.remove = function(element) {
     var index = this.indexOf(element);
     return this.removeAt(index);
   };
+
   this.indexOf = function(element) {
     var current = head,
       index = -1;
@@ -231,12 +247,15 @@ function DoublyLinkedList() {
     }
     return -1;
   };
+
   this.isEmpty = function() {
     return length === 0;
   };
+
   this.size = function() {
     return length;
   };
+
   this.toString = function() {
     var current = head,
       s = current
@@ -248,6 +267,7 @@ function DoublyLinkedList() {
     }
     return s;
   };
+
   this.inverseToString = function() {
     var current = tail,
       s = current
@@ -259,15 +279,19 @@ function DoublyLinkedList() {
     }
     return s;
   };
+
   this.print = function() {
     console.log(this.toString());
   };
+
   this.printInverse = function() {
     console.log(this.inverseToString());
   };
+
   this.getHead = function() {
     return head;
   };
+
   this.getTail = function() {
     return tail;
   }
