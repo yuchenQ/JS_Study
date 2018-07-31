@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/yuchenQ/JS_Study/issues"
   },
-  "homepage": "https://github.com/yuchenQ/JS_Study#readme"
+  "homepage": "https://github.com/yuchenQ/JS_Study#readme",
+  "dependencies": {}
 }
