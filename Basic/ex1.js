@@ -1,15 +1,15 @@
 function ex(name, age) {
-  console.log('arguments', arguments);
-  console.log('name:', name, 'age:', age);
-  name = 'yuchen';
+  console.log("arguments", arguments);
+  console.log("name:", name, "age:", age);
+  name = "yuchen";
   console.log(arguments[0]);
 }
-ex('Anotherhome', '556', 'www.anotherhome.net');
+ex("Anotherhome", "556", "www.anotherhome.net");
 // =============================================================================
 function setName(o) {
-  o.name = 'DIYgod';
+  o.name = "DIYgod";
   o = {};
-  o.name = 'Anotherhome';
+  o.name = "Anotherhome";
 }
 
 var p = {};
@@ -39,7 +39,7 @@ function getClass(a) {
   const str = Object.prototype.toString.call(a);
   return /^\[object (.*)\]$/.exec(str)[1];
 }
-console.log(getClass(new Array('a')));
+console.log(getClass(new Array("a")));
 // =============================================================================
 var values = [1, -3, 0, 5, 10, 1, 34, 2];
 // 从小到大
@@ -47,36 +47,36 @@ console.log(values.sort((a, b) => a - b));
 // 从大到小
 console.log(values.sort((a, b) => b - a));
 // =============================================================================
-var colors = ['red', 'green', 'blue'];
+var colors = ["red", "green", "blue"];
 // 1. 删除第一项(删除)
 console.log(colors.splice(0, 1)); // removed是一个数组，包含删除的项 ["red"]
 console.log(colors);
 // 2. 从第一个位置开始插入两项(插入)
-console.log(colors.splice(1, 0, 'yellow', 'orange')); // 如果没有删除, 返回的是一个空数组[]
+console.log(colors.splice(1, 0, "yellow", "orange")); // 如果没有删除, 返回的是一个空数组[]
 console.log(colors);
 // 3. 替换
-console.log(colors.splice(1, 1, 'red'));
+console.log(colors.splice(1, 1, "red"));
 console.log(colors);
 // =============================================================================
 var a = [1, 2, 3, 4, 5, 4, 3, 2, 1];
 
 var everyResult = a.every(function(item, index, array) {
-  return (item > 2);
+  return item > 2;
 });
 console.log(everyResult); // false
 
 var someResult = a.some(function(item, index, array) {
-  return (item > 2);
+  return item > 2;
 });
 console.log(someResult); // true
 
 var filterResult = a.filter(function(item, index, array) {
-  return (item > 2);
+  return item > 2;
 });
 console.log(filterResult); // [3, 4, 5, 4, 3]
 
 var mapResult = a.map(function(item, index, array) {
-  return (item * 2);
+  return item * 2;
 });
 console.log(mapResult); // [2, 4, 6, 8, 10, 8, 6, 4, 2]
 
@@ -100,7 +100,6 @@ var sum2 = a.reduceRight(function(prev, cur, index, array) {
 console.log(sum2); // 9
 // =============================================================================
 function createComparisonFunction(propertyName) {
-
   return function(object1, object2) {
     var value1 = object1[propertyName];
     var value2 = object2[propertyName];
@@ -114,13 +113,16 @@ function createComparisonFunction(propertyName) {
     }
   };
 }
-var data = [{
-  name: "Zachary",
-  age: 28
-}, {
-  name: "Nicholas",
-  age: 29
-}];
+var data = [
+  {
+    name: "Zachary",
+    age: 28
+  },
+  {
+    name: "Nicholas",
+    age: 29
+  }
+];
 
 data.sort(createComparisonFunction("name"));
 console.log(data[0].name); //Nicholas
@@ -132,7 +134,7 @@ function factorial(num) {
   if (num <= 1) {
     return 1;
   } else {
-    return num * arguments.callee(num - 1)
+    return num * arguments.callee(num - 1);
   }
 }
 var trueFactorial = factorial;
@@ -174,11 +176,9 @@ Object.defineProperty(book, "year", {
     return this._year;
   },
   set: function(newValue) {
-
     if (newValue > 2004) {
       this._year = newValue;
       this.edition += newValue - 2004;
-
     }
   }
 });
@@ -213,11 +213,11 @@ Object.defineProperties(books, {
 // =============================================================================
 function Person() {}
 Person.prototype = {
-  name: 'a',
-  age: 'b',
-  job: 'c',
+  name: "a",
+  age: "b",
+  job: "c",
   sayName: function() {
-    console.log('d');
+    console.log("d");
   }
 };
 // =============================================================================
@@ -267,7 +267,6 @@ console.log(instance1.colors); //"red,blue,green,black"
 instance1.sayName(); //"Nicholas";
 instance1.sayAge(); //29
 
-
 var instance2 = new SubType("Greg", 27);
 console.log(instance2.colors); //"red,blue,green"
 instance2.sayName(); //"Greg";
@@ -290,7 +289,7 @@ console.log(person.friends); //"Shelby,Court,Van,Rob,Barbie"
 
 aperson = Object.create(person, {
   name: {
-    value: 'Greg'
+    value: "Greg"
   }
 });
 console.log(aperson.name);
